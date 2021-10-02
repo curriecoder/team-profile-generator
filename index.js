@@ -1,51 +1,114 @@
+// node modules
 const fs = require('fs');
 const inquirer = require('inquirer');
 
-const userPrompts = [
+const teamArr = [];
+
+const Manager = require('./lib/manager');
+const Intern = require('./lib/intern');
+const Engineer = require("./lib/engineer");
+
+const managerPrompt = [
   {
     type: "input",
     message: "Enter team manager name.",
-    name: "managerName",
+    name: "name",
   },
   {
     type: "input",
-    message: "Enter team manager employee ID.",
-    name: "managerId",
+    message: "Enter team manager ID.",
+    name: "id",
   },
   {
     type: "input",
-    message: "Enter team manager employee email address.",
-    name: "managerEmail",
+    message: "Enter team manager email address.",
+    name: "email",
   },
   {
     type: "input",
     message: "Enter team manager office number.",
-    name: "managerOffNum",
+    name: "offNum",
   },
 ];
 
-const memberCreate = [
-  {
-    type: "list",
-    message: "Select the role of new member",
-    name: "roleSelect",
-    choices: ["Employee", "Intern", "Engineer"]
-  },
-];
 
 // Prompt User for information(Inquirer):
   // Set user as manager
 inquirer
-  .prompt(userPrompts)
-  .then((responses) => {
-    console.log(responses);
-    inquirer
-      .prompt(memberCreate)
-      .then((responses) => 
-      console.log(responses)
-      );
-  })
+  .prompt(managerPrompt)
+  .then((managerResponse) => {
+    const manger = new Manager (name, id, email, offNum);
+    console.log(managerResponse);
+    teamArr.push(manger);
+    console.log(manager);
+  });
 
+
+const employeePrompt = [
+  {
+    type: "list",
+    message: "Select the role of new member",
+    name: "roleSelect",
+    choices: ["Intern", "Engineer"],
+  },
+  {
+    type: "input",
+    message: "Enter name of new member",
+    name: "name",
+  },
+  {
+    type: "input",
+    message: "Enter ID of new member",
+    name: "id",
+  },
+  {
+    type: "input",
+    message: "Enter email of new member",
+    name: "email",
+  },
+  {
+    type: "input",
+    message: "Enter GitHub username of new engineer",
+    name: "github",
+    when: (input) => input.roleSelect === "Engineer",
+  },
+  {
+    type: "input",
+    message: "Enter school name of new intern",
+    name: "school",
+    when: (input) => input.roleSelect === "Intern",
+  },
+  {
+    type: "confirm",
+    name: "confirmAddEmployee",
+    message: "Would you like to add more team members?",
+    default: false,
+  },
+];
+
+const addEmployee = () => {
+  inquirer
+    .prompt(employeePrompt)
+    .then(employeeInfo => {
+      let employeeInfo = { name, id, email, roleSelect, github, school, confirmAddEmployee };
+      let employee;
+      // **Maybe refactor into switch case**
+      if (roleSelect === "Engineer") {
+        employee = new Engineer (name, id, email, github);
+        console.log(employee);
+      } else if (role === "Intern") {
+        employee = new Intern (name, id, email, school);
+        console.log(employee);
+      }
+      teamArr.push(employee);
+
+      if (confirmAddEmployee) {
+        return addEmployee(teamArr);
+      } else {
+        return teamArr;
+      }
+    })
+};
 
   //1. ID:
   //2. Email:
