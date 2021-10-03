@@ -1,7 +1,11 @@
+// require createHTML.js for page creation
+const createHTML = require('./src/createHTML')
+
 // node modules
 const fs = require('fs');
 const inquirer = require('inquirer');
 
+// empty array to receive team strings
 const teamArr = [];
 
 const Manager = require('./lib/manager');
@@ -116,10 +120,24 @@ const addEmployee = () => {
     })
 };
 
+const writeFile = data => {
+  fs.writeFile('./dist/index.html', data, err => {
+    if (err) {
+      console.log(err);
+      return;
+    } else {
+      console.log("Congratulations, your team profile page has been created. Open index.html to view the page.");
+    }
+  })
+};
+
 addManager()
   .then(addEmployee)
   .then(teamArr => {
-    console.log(teamArr);
+    return createHTML(teamArr);
+  })
+  .then(teamPage => {
+    return writeFile(teamPage);
   })
   .catch(err => {
     console.log(err);

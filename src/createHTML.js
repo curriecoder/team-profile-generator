@@ -64,21 +64,21 @@ createHTML = (data) => {
     const role = employee.getRole();
 
     // for manager role
-    if (role === 'manager') {
+    if (role === 'Manager') {
       const managerCard = createManagerCard(employee);
 
       pageArr.push(managerCard);
     }
 
     // for engineer role
-    if (role === 'engineer') {
+    if (role === 'Engineer') {
       const engineerCard = createEngineerCard(employee);
 
       pageArr.push(engineerCard);
     }
 
     // for intern role
-    if (role === 'intern') {
+    if (role === 'Intern') {
       const internCard = createInternCard(employee);
 
       pageArr.push(internCard);
@@ -89,7 +89,7 @@ createHTML = (data) => {
   const employeeCards = pageArr.join('');
 
   // return array to created page
-  const createTeam = (employeeCards)
+  const createTeam = createTeamPage(employeeCards)
   return createTeam;
 
 }
