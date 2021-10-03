@@ -8,8 +8,8 @@ const createManagerCard = (manager) => {
       <h6 class="card-subtitle mb-2 text-muted">Manager</h6>
       <ul class="card-text">
         <li class="id">${manager.id}</li>
-        <li class="email">Email: <a href="mailto:${manager.email}"</a>${manager.email}</li>
-        <li class="offNum">${manager.offNum}</li>
+        <li class="email">Email: <a href="mailto:${manager.email}">${manager.email}</a></li>
+        <li class="offNum">Office Number: ${manager.offNum}</li>
       </ul>
     </div>
   </div>
@@ -26,8 +26,8 @@ const createEngineerCard = (engineer) => {
       <h6 class="card-subtitle mb-2 text-muted">Engineer</h6>
       <ul class="card-text">
         <li class="id">${engineer.id}</li>
-        <li class="email">Email: <a href="mailto:${engineer.email}"</a>${engineer.email}</li>
-        <li class="github">${engineer.github}</li>
+        <li class="email">Email: <a href="mailto:${engineer.email}">${engineer.email}</a></li>
+        <li class="github">Github: <a href="https://github.com/${engineer.github}">${engineer.github}</a></li>
       </ul>
     </div>
   </div>
@@ -44,8 +44,8 @@ const createInternCard = (intern) => {
       <h6 class="card-subtitle mb-2 text-muted">Intern</h6>
       <ul class="card-text">
         <li class="id">${intern.id}</li>
-        <li class="email">Email: <a href="mailto:${intern.email}"</a>${intern.email}</li>
-        <li class="school">${intern.school}</li>
+        <li class="email">Email: <a href="mailto:${intern.email}">${intern.email}</a></li>
+        <li class="school">School: ${intern.school}</li>
       </ul>
     </div>
   </div>
