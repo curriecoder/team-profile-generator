@@ -33,24 +33,12 @@ const managerPrompt = [
 ];
 
 
-// Prompt User for information
-  // Set user as manager
-inquirer
-  .prompt(managerPrompt)
-  .then((managerResponse) => {
-    const manger = new Manager (name, id, email, offNum);
-    console.log(managerResponse);
-    teamArr.push(manager);
-    console.log(manager);
-  });
-
-
   // prompts for adding employee
 const employeePrompt = [
   {
     type: "list",
     message: "Select the role of new member",
-    name: "roleSelect",
+    name: "role",
     choices: ["Intern", "Engineer"],
   },
   {
@@ -72,13 +60,13 @@ const employeePrompt = [
     type: "input",
     message: "Enter GitHub username of new engineer",
     name: "github",
-    when: (input) => input.roleSelect === "Engineer",
+    when: (input) => input.role === "Engineer",
   },
   {
     type: "input",
     message: "Enter school name of new intern",
     name: "school",
-    when: (input) => input.roleSelect === "Intern",
+    when: (input) => input.role === "Intern",
   },
   {
     type: "confirm",
@@ -88,15 +76,30 @@ const employeePrompt = [
   },
 ];
 
+
+// Prompt User for information
+  // Set user as manager
+const addManager = () => {
+  return inquirer
+    .prompt(managerPrompt)
+    .then((managerResponse) => {
+      const { name, id, email, offNum } = managerResponse;
+      const manager = new Manager (name, id, email, offNum);
+      teamArr.push(manager);
+      console.log(manager);
+    });
+  }
+
+
 // function for adding employee and adding to team array
 const addEmployee = () => {
-  inquirer
+  return inquirer
     .prompt(employeePrompt)
     .then(employeeInfo => {
-      let employeeInfo = { name, id, email, roleSelect, github, school, confirmAddEmployee };
+      let { name, id, email, role, github, school, confirmAddEmployee } = employeeInfo;
       let employee;
-      // **Maybe refactor into switch case**
-      if (roleSelect === "Engineer") {
+      // *Maybe refactor into switch case*
+      if (role === "Engineer") {
         employee = new Engineer (name, id, email, github);
         console.log(employee);
       } else if (role === "Intern") {
@@ -112,6 +115,15 @@ const addEmployee = () => {
       }
     })
 };
+
+addManager()
+  .then(addEmployee)
+  .then(teamArr => {
+    console.log(teamArr);
+  })
+  .catch(err => {
+    console.log(err);
+  })
 
   //1. ID:
   //2. Email:
