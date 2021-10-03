@@ -1,5 +1,3 @@
-const Engineer = require("../lib/engineer");
-
 // create Manager card
 const createManagerCard = (manager) => {
   return `
@@ -46,7 +44,7 @@ const createInternCard = (intern) => {
       <h6 class="card-subtitle mb-2 text-muted">Intern</h6>
       <ul class="card-text">
         <li class="id">${intern.id}</li>
-        <li class="email">Email: <a href="mailto:${intern.email}</a>${intern.email}</li>
+        <li class="email">Email: <a href="mailto:${intern.email}"</a>${intern.email}</li>
         <li class="school">${intern.school}</li>
       </ul>
     </div>
@@ -55,7 +53,51 @@ const createInternCard = (intern) => {
 }
 
 
-<!DOCTYPE html>
+
+createHTML = (data) => {
+  // create array to receive data
+  pageArr = [];
+
+  // loop through data length
+  for (let i = 0; i < data.length; i++) {
+    const employee = data[i];
+    const role = employee.getRole();
+
+    // for manager role
+    if (role === 'manager') {
+      const managerCard = createManagerCard(employee);
+
+      pageArr.push(managerCard);
+    }
+
+    // for engineer role
+    if (role === 'engineer') {
+      const engineerCard = createEngineerCard(employee);
+
+      pageArr.push(engineerCard);
+    }
+
+    // for intern role
+    if (role === 'intern') {
+      const internCard = createInternCard(employee);
+
+      pageArr.push(internCard);
+    }
+  }
+
+  // join card strings on page array
+  const employeeCards = pageArr.join('');
+
+  // return array to created page
+  const createTeam = (employeeCards)
+  return createTeam;
+
+}
+
+// create HTML page
+const createTeamPage = (employeeCards) => {
+  return`
+  <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -72,18 +114,15 @@ const createInternCard = (intern) => {
   </header>
 
 <div class="container">
-  <div class="card justify-content-center align-items-center" style="width: 18rem;">
-    <i class="fas fa-book-reader fa-5x"></i>
-    <div class="card-body">
-      <h5 class="card-title">Alex</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Intern</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-  </div>
+  ${employeeCards}
 </div>
 
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="./assets/js/index.js"></script>
 </html>
+  `
+};
+
+// export HTML page
+module.exports = createHTML;
