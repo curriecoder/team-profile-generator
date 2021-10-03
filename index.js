@@ -8,6 +8,7 @@ const Manager = require('./lib/manager');
 const Intern = require('./lib/intern');
 const Engineer = require("./lib/engineer");
 
+// prompts for manager input
 const managerPrompt = [
   {
     type: "input",
@@ -32,18 +33,19 @@ const managerPrompt = [
 ];
 
 
-// Prompt User for information(Inquirer):
+// Prompt User for information
   // Set user as manager
 inquirer
   .prompt(managerPrompt)
   .then((managerResponse) => {
     const manger = new Manager (name, id, email, offNum);
     console.log(managerResponse);
-    teamArr.push(manger);
+    teamArr.push(manager);
     console.log(manager);
   });
 
 
+  // prompts for adding employee
 const employeePrompt = [
   {
     type: "list",
@@ -86,6 +88,7 @@ const employeePrompt = [
   },
 ];
 
+// function for adding employee and adding to team array
 const addEmployee = () => {
   inquirer
     .prompt(employeePrompt)
