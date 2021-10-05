@@ -5,7 +5,7 @@ test('creates an Employee obj', () => {
   // make an instance of employee
   const employee = new Employee("Andy", 46, "andrew.j.currie0@gmail.com");
 
-  // check that properties are correct constructors
+  // check that properties are of correct constructors
   expect(employee.getName()).toEqual(expect.any(String));
   expect(employee.getId()).toEqual(expect.any(Number));
   expect(employee.getEmail()).toEqual(expect.any(String));

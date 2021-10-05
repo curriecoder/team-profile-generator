@@ -1,4 +1,4 @@
-// adds Employee constructor
+// adds Engineer constructor
 const Engineer = require("../lib/engineer");
 
 test("creates an Engineer obj", () => {
@@ -22,12 +22,12 @@ test("retrieves engineer github with getGithub()", () => {
     "andrew.j.currie0@gmail.com",
     "curriecoder"
   );
-  // testing getName() method
+  // testing getGithub() method
   expect(engineer.getGithub()).toEqual(expect.stringContaining(engineer.github.toString()));
 });
 
 test("retrieves engineer Role", () => {
-  // make an instance of employee
+  // make an instance of engineer
   const engineer = new Engineer(
     "Andy",
     46,
